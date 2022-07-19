@@ -7,4 +7,4 @@ authRouter.route('/register')
     .post((req, res) => { res.sendStatus(501); });
 
 
-    module.exports = authRouter;
+module.exports = authRouter;

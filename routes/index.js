@@ -13,7 +13,7 @@ const router = require('express').Router();
 // (.category => categoryRouter);
 // (.tasks => categoryTasks);
 
-// Nous indiquons qu'à l'arrivée sur me segment /category, nous devons charger le routeur enfant categor-routeur
+// Nous indiquons qu'à l'arrivée sur le segment /category, nous devons charger le routeur "enfant" category-router ou autre...
 // router.use('path', 'handler');
 router.use('/category', categoryRouter);
 router.use('/task', taskRouter);
