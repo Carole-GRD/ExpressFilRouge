@@ -3,12 +3,13 @@
 // //  A partir de la méthode Router(), on construit un nouveau router qu'on appelle categoryRouter
 // const categoryRouter = express.Router();
 
-// Ou plus rapide en une ligne vu que l'impirt d'express nous sert à appeler 
-// la méthode Router() qui construit notre route
+// Ou plus rapide en une ligne vu que l'import d'express nous sert à appeler la méthode Router() qui construit notre route
 const categoryRouter = require('express').Router();
 
 // Configuration des différentes routes
+// ------------------------------------
 // 2 Méthodes
+// -----------
 // localhost:8080/category/1
 
 // // 1ere méthode
@@ -50,14 +51,14 @@ const categoryRouter = require('express').Router();
 // On peut remarquer que les routes '/' et '/:id' se répètent mais avec différentes méthodes (get, put, post, delete)
 // Il existe une écriture raccourcie pour définir les routes
 categoryRouter.route('/')
-    .get((req, res) => { res.sendStatus(501); })     // Récupération de toutes les données
-    .post((req, res) => { res.sendStatus(501); });   // Ajout d'une nouvelle catégorie
+    .get((req, res) => { res.sendStatus(501); })      // Récupération de toutes les données
+    .post((req, res) => { res.sendStatus(501); });    // Ajout d'une nouvelle catégorie
 
 categoryRouter.route('/:id')
-    .get((req, res) => { res.sendStatus(501); })     // Récupération d'une catégorie en particulier
+    .get((req, res) => { res.sendStatus(501); })      // Récupération d'une catégorie en particulier
     .put((req, res) => { res.sendStatus(501); })      // Modification d'une catégorie
     .delete((req, res) => { res.sendStatus(501); });  // Suppresion d'une catégorie   
 
 
-// On exporte notre router ainsi crée et configuré
+// On exporte notre router ainsi créé et configuré
 module.exports = categoryRouter;

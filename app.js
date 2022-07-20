@@ -14,6 +14,7 @@ const { NODE_ENV, MESSAGE, PORT } = process.env;
 console.log( 'Lancé en', NODE_ENV, ':', MESSAGE);
 
 // Création d'un serveur Express
+// ------------------------------
 // doit se faire au dessus du code
     // 1) Toujours faire en premier : importer le module express et le stocker dans une variable
 const express = require('express');
@@ -23,7 +24,9 @@ const router = require('./routes');
     // on crée une instance du module Express ????
 const app = express();
 
+
 // Mise en place d'une route temporaire
+// ------------------------------------
 // app.get('/users', (req,res) => {
 //     console.log(req.url);
 //     const data = {
@@ -34,12 +37,13 @@ const app = express();
 
 
 // #region route temporaire
-
+// ------------------------
 // On indique à notre serveur, qu'à l'arrivée sur la route /api, il doit utiliser notre module router
 app.use('/api', router);
 
 
 // On met le serveur sur "écoute" sur le port précisé dans la variable d'environnement "PORT"
+// ------------------------------------------------------------------------------------------
 app.listen(PORT, () => {
     console.log(`Server up on port : ${PORT} [${NODE_ENV}]`);
 });
