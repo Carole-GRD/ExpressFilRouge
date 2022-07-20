@@ -44,7 +44,11 @@ require('express-async-errors');
 //     res.json(data);
 // });
 
-// on indique à notre app que pour chaque requ^te, elle doit l'intercepter
+// Ajout d'un middelware pour permettre à notre serveur de lire des objets json en post
+// ATTENTION : à mettre en premier middelware
+app.use(express.json());
+
+// on indique à notre app que pour chaque requête, elle doit l'intercepter
 // On doit récupérer la requête avant d'utiliser le middelware qui dispatch vers nos routes :
     // Elle doit se trouver avant !
 app.use(async(req, res, next) => {
