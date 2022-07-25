@@ -9,6 +9,7 @@ const idValidator = () => {
         {
             // On envoie une erreur 404
             res.sendStatus(400);    // Bad Request => La requête n'est pas bonne
+            return;    // pour ne pas que le terminal plante ???
         }
         // Sinon, on continue la requête grâce au next
         next();

@@ -1,16 +1,18 @@
 const authController = require('../controllers/auth-controller');
+const bodyValidation = require('../middelwares/body-validation');
+const { registerValidator } = require('../validators/auth-validator');
 
 const authRouter = require('express').Router();
 
 authRouter.route('/login')
-    .post((req, res) => { res.sendStatus(501); });
+    .post(authController.login);
 
 authRouter.route('/register')
-    .post(authController.register);
+    .post(bodyValidation(registerValidator) ,authController.register);
 
 
     // OU BIEN
-// authRouter.post('/login', (req, res) => { res.sendStatus(501); });
-// authRouter.post('/register', (req, res) => { res.sendStatus(501); });
+// authRouter.post('/login', authController.login);
+// authRouter.post('/register', authController.register);
 
 module.exports = authRouter;
