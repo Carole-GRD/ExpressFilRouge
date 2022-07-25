@@ -27,10 +27,11 @@ const express = require('express');
     // 2) On crée le serveur et on le stocke dans une variable
     // on crée une instance du module Express ????
 const app = express();
+// on importe la librairie aui gère les erreurs async await
+// ATTENTION : à mettre avant require (les routes)
+require('express-async-errors');
 // On importe notre module router présent dans index.js en important tout le dossier routes
 const router = require('./routes');
-// on importe la librairie aui gère les erreurs async await
-require('express-async-errors');
 
 
 

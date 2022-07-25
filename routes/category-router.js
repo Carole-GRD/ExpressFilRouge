@@ -6,8 +6,11 @@
 // Ou plus rapide en une ligne vu que l'import d'express nous sert à appeler la méthode Router() qui construit notre route
 const categoryRouter = require('express').Router();
 
-// Import du controller category
+// Import du controller category 
 const categoryController = require('../controllers/category-controller');
+const idValidator = require('../middelwares/idValidator');
+const bodyValidation = require('../middelwares/body-validation');
+const categoryValidator = require('../validators/category-validator');
 
 
 // Configuration des différentes routes
@@ -54,14 +57,17 @@ const categoryController = require('../controllers/category-controller');
 
 // On peut remarquer que les routes '/' et '/:id' se répètent mais avec différentes méthodes (get, put, post, delete)
 // Il existe une écriture raccourcie pour définir les routes
+// categoryRouter.use(idValidator());   // -> on va plutôt l'appeler pour chaque route où on a besoin de l'id   (voir categoryRouter.route('/:id'))  
+
 categoryRouter.route('/')
     .get(categoryController.getAll)       // Récupération de toutes les données
-    .post(categoryController.create);     // Ajout d'une nouvelle catégorie
+    .post(bodyValidation(categoryValidator), categoryController.create);     // Ajout d'une nouvelle catégorie
 
+// On rajoute notre middelware de validation de format de l'Id pour chaque route où on a besoin de valider l'id
 categoryRouter.route('/:id')
-    .get(categoryController.getById)      // Récupération d'une catégorie en particulier
-    .put(categoryController.update)       // Modification d'une catégorie
-    .delete(categoryController.delete);   // Suppresion d'une catégorie   
+    .get(idValidator(), categoryController.getById)      // Récupération d'une catégorie en particulier
+    .put(idValidator(),bodyValidation(categoryValidator), categoryController.update)       // Modification d'une catégorie
+    .delete(idValidator(), categoryController.delete);   // Suppresion d'une catégorie   
 
 
 // On exporte notre router ainsi créé et configuré

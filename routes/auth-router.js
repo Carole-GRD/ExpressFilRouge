@@ -1,10 +1,12 @@
+const authController = require('../controllers/auth-controller');
+
 const authRouter = require('express').Router();
 
 authRouter.route('/login')
     .post((req, res) => { res.sendStatus(501); });
 
 authRouter.route('/register')
-    .post((req, res) => { res.sendStatus(501); });
+    .post(authController.register);
 
 
     // OU BIEN
