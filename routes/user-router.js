@@ -1,11 +1,14 @@
+const userController = require('../controllers/user-controller');
+const idValidator = require('../middelwares/idValidator');
+
 const userRouter = require('express').Router();
 
 userRouter.route('/')
-    .get((req, res) => { res.sendStatus(501); });
+    .get(userController.getAll);
 
 userRouter.route('/:id')
-    .get((req, res) => { res.sendStatus(501); })
-    .put((req, res) => { res.sendStatus(501); })
-    .delete((req, res) => { res.sendStatus(501); });
+    .get( idValidator(), userController.getById)
+    .put( idValidator(), userController.update)
+    .delete( idValidator(), userController.delete);
 
 module.exports = userRouter;

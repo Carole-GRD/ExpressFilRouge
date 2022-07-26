@@ -11,6 +11,7 @@ const categoryController = require('../controllers/category-controller');
 const idValidator = require('../middelwares/idValidator');
 const bodyValidation = require('../middelwares/body-validation');
 const categoryValidator = require('../validators/category-validator');
+const authentication = require('../middelwares/auth-jwt-middleware');
 
 
 // Configuration des différentes routes
@@ -61,13 +62,13 @@ const categoryValidator = require('../validators/category-validator');
 
 categoryRouter.route('/')
     .get(categoryController.getAll)       // Récupération de toutes les données
-    .post(bodyValidation(categoryValidator), categoryController.create);     // Ajout d'une nouvelle catégorie
+    .post(authentication(['Admin', 'Moderator', 'User']), bodyValidation(categoryValidator), categoryController.create);     // Ajout d'une nouvelle catégorie
 
 // On rajoute notre middelware de validation de format de l'Id pour chaque route où on a besoin de valider l'id
 categoryRouter.route('/:id')
     .get(idValidator(), categoryController.getById)      // Récupération d'une catégorie en particulier
-    .put(idValidator(),bodyValidation(categoryValidator), categoryController.update)       // Modification d'une catégorie
-    .delete(idValidator(), categoryController.delete);   // Suppresion d'une catégorie   
+    .put(authentication(['Admin', 'Moderator']), idValidator(),bodyValidation(categoryValidator), categoryController.update)       // Modification d'une catégorie
+    .delete(authentication(['Admin']), idValidator(), categoryController.delete);   // Suppresion d'une catégorie   
 
 
 // On exporte notre router ainsi créé et configuré

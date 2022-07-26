@@ -28,7 +28,7 @@ const categoryController = {
         }
         else{
             // Si la catégorie est null, on renvoie une erreur 404 -> Ressource not found
-            res.sendStatus(404);
+            return res.sendStatus(404);
         }
     },
     create : async (req, res ) => {
@@ -59,7 +59,7 @@ const categoryController = {
             res.status(200).json(category);
         }
         else{
-            res.sendStatus(404);
+            return res.sendStatus(404);
         }
     },
     delete : async (req, res) => {
@@ -75,7 +75,7 @@ const categoryController = {
             // res.sendStatus(200);   // Fonctionne aussi, ce sera soit l'une soit l'autre
         }
         else{
-            res.sendStatus(404);    // -> Si categoryToDelete est null, c'est que l'id recherché n'existe pas : Not found
+            return res.sendStatus(404);    // -> Si categoryToDelete est null, c'est que l'id recherché n'existe pas : Not found
         }
     },
 };

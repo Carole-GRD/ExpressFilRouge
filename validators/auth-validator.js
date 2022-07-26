@@ -28,7 +28,8 @@ const registerValidator = yup.object({
 // 	"password": "1234test"
 // }
 const loginValidator = yup.object({
-
+    credential : yup.string().required().max(255),
+    password : yup.string().required(),
 });
 
 

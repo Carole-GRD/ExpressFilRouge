@@ -2,6 +2,9 @@
 
 const User = require("../models/user-model");
 
+// on importe notre utilitaire pour pouvoir générer un token
+const jwtUtils = require('../utils/jwt-utils');
+
 // on importe argon2
 const argon2 = require('argon2');
 
@@ -36,7 +39,8 @@ const authController = {
             return res.status(401).json({ error : 'Bad credentials' });
         }
         // TODO : générer et renvoyer un token
-        return res.json({ msg : 'Vous vous êtes bien connecté.e'});
+        const token = await jwtUtils.generate(user);
+        return res.json({token});   // -> accolades pour avoir un objet token et pas juste sa valeur
     },
     register : async (req, res) => {
         // Pour enregistrer un nouvel utilisateur, on ne va pas stocker son mot de passe en clair dans la base de données
@@ -58,7 +62,8 @@ const authController = {
             password : hashedPassword,    // Pour le password de notre user à insérer en db, on fournit le password une fois hashé
         });
         await userToInsert.save();
-        res.status(200).json(userToInsert);
+        const token = await jwtUtils.generate(userToInsert);
+        res.status(200).json({token});
     }
 }
 

@@ -29,7 +29,7 @@ const bodyValidation = (yupValidator) => {
 
         // Si on a une erreur : on renverra Bad Request
         catch (e) {
-            res.sendStatus(400);  // Bad Request
+            return res.sendStatus(400);  // Bad Request
         }
     }
 }
