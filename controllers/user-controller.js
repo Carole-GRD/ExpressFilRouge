@@ -32,7 +32,7 @@ const userController = {
         if (!user) {
             return res.sendStatus(404);   // Not Found -> élément non trouvé
         }
-        // si trouvé
+        //Si trouvé : On doit le transformer en userDTO avant de le renvoyer
         const userDTO = userMapperToDTO(user);
         res.status(200).json(userDTO);
     },
