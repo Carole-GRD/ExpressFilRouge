@@ -1,5 +1,5 @@
 const authController = require('../controllers/auth-controller');
-const bodyValidation = require('../middelwares/body-validation');
+const bodyValidation = require('../middlewares/body-validation');
 const { registerValidator, loginValidator } = require('../validators/auth-validator');
 
 const authRouter = require('express').Router();

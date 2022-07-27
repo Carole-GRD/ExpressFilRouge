@@ -8,10 +8,10 @@ const categoryRouter = require('express').Router();
 
 // Import du controller category 
 const categoryController = require('../controllers/category-controller');
-const idValidator = require('../middelwares/idValidator');
-const bodyValidation = require('../middelwares/body-validation');
+const idValidator = require('../middlewares/idValidator');
+const bodyValidation = require('../middlewares/body-validation');
 const categoryValidator = require('../validators/category-validator');
-const authentication = require('../middelwares/auth-jwt-middleware');
+const authentication = require('../middlewares/auth-jwt-middleware');
 
 
 // Configuration des différentes routes

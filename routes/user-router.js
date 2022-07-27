@@ -1,5 +1,5 @@
 const userController = require('../controllers/user-controller');
-const idValidator = require('../middelwares/idValidator');
+const idValidator = require('../middlewares/idValidator');
 
 const userRouter = require('express').Router();
 
