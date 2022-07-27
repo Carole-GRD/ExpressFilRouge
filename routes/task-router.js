@@ -1,18 +1,21 @@
+const taskController = require('../controllers/task-controller');
+
+
 const taskRouter = require('express').Router();
 
 taskRouter.route('/')
-    .get((req, res) => { res.sendStatus(501); })
-    .post((req, res) => { res.sendStatus(501); });
+    .get(taskController.getAll)
+    .post(taskController.create);
 
 taskRouter.route('/:id')
-    .get((req, res) => { res.sendStatus(501); })
-    .put((req, res) => { res.sendStatus(501); })
-    .delete((req, res) => { res.sendStatus(501); });
+    .get(taskController.getById)
+    .put(taskController.update)
+    .delete(taskController.delete);
 
-taskRouter.route('/:categoryname')
-    .get((req, res) => { res.sendStatus(501); });
+taskRouter.route('/category/:categoryname')
+    .get(taskController.getByCategory);
 
-taskRouter.route('/:username')
-    .get((req, res) => { res.sendStatus(501); });
+taskRouter.route('/user/:username')
+    .get(taskController.getByUser);
 
 module.exports = taskRouter;
