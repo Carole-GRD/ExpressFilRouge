@@ -1,4 +1,4 @@
-const { Schema, model, types, Types } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const Category = require('./category-model');
 const User = require('./user-model');
 
@@ -30,6 +30,7 @@ const taskSchema = new Schema({
     },
     expectedEndingDate : {
         type : String,
+        required : false,
     },
     status : {
         type : String,
@@ -43,6 +44,6 @@ const taskSchema = new Schema({
     timestamps : true,
 });
 
-const Task = ('Task', taskSchema);
+const Task = model('Task', taskSchema);
 
 module.exports = Task;
