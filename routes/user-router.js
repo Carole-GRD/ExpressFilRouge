@@ -8,7 +8,7 @@ const authentication = require('../middlewares/auth-jwt-middleware');
 const userRouter = require('express').Router();
 
 userRouter.route('/')
-    .get(userController.getAll);
+    .get(authentication(), userController.getAll);
 
 userRouter.route('/:id')
     .get(authentication(), idValidator(), userController.getById)

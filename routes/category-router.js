@@ -61,12 +61,12 @@ const authentication = require('../middlewares/auth-jwt-middleware');
 // categoryRouter.use(idValidator());   // -> on va plutôt l'appeler pour chaque route où on a besoin de l'id   (voir categoryRouter.route('/:id'))  
 
 categoryRouter.route('/')
-    .get(categoryController.getAll)       // Récupération de toutes les données
-    .post(authentication(['Admin', 'Moderator', 'User']), bodyValidation(categoryValidator), categoryController.create);     // Ajout d'une nouvelle catégorie
+    .get(authentication(), categoryController.getAll)       // Récupération de toutes les données
+    .post(authentication(['Admin', 'Moderator']), bodyValidation(categoryValidator), categoryController.create);     // Ajout d'une nouvelle catégorie
 
 // On rajoute notre middelware de validation de format de l'Id pour chaque route où on a besoin de valider l'id
 categoryRouter.route('/:id')
-    .get(idValidator(), categoryController.getById)      // Récupération d'une catégorie en particulier
+    .get(authentication(), idValidator(), categoryController.getById)      // Récupération d'une catégorie en particulier
     .put(authentication(['Admin', 'Moderator']), idValidator(),bodyValidation(categoryValidator), categoryController.update)       // Modification d'une catégorie
     .delete(authentication(['Admin']), idValidator(), categoryController.delete);   // Suppresion d'une catégorie   
 

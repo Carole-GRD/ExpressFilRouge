@@ -3,12 +3,30 @@ const Task = require("../models/task-model");
 const taskController = {
     // Tous les getter
     getAll : async (req, res) => {
+        console.log(req.query);
         // Pour récupérer le offset et le limit passés dans la requête
         const offset = req.query.offset ? req.query.offset : 0;
         // ATTENTION : si on n'indique rien dans l'url, on en récupérera seulement les 10 premières tâches
         const limit = req.query.limit ? req.query.limit : 10;
+
+        // Pour la possible query avec le status : 
+        let statusFilter;
+        const status = req.query.status;
+        if (status) {
+            // Si notre status est un tableau (contient plusieurs status à évaluer)
+            if (Array.isArray(status)) {
+                // Puisqu'on a un tableau, on regarde si le status de chaque reqête a une valeur compris dans le tableau fourni
+                statusFilter = { status : { $in : status } };
+            }
+            else {
+                statusFilter = { status : status };
+            }
+        }
+        else {
+            statusFilter = {};
+        }
         
-        const tasks = await Task.find()
+        const tasks = await Task.find(statusFilter)
             .populate({
                 path : 'categoryId',
                 select : { name : 1, icon : 1 },
@@ -53,13 +71,31 @@ const taskController = {
         const offset = req.query.offset ? req.query.offset : 0;
         const limit = req.query.limit ? req.query.limit : 10;
 
+        // Pour la possible query avec le status : 
+        let statusFilter;
+        const status = req.query.status;
+        if (status) {
+            // Si notre status est un tableau (contient plusieurs status à évaluer)
+            if (Array.isArray(status)) {
+                // Puisqu'on a un tableau, on regarde si le status de chaque reqête a une valeur compris dans le tableau fourni
+                statusFilter = { status : { $in : status } };
+            }
+            else {
+                statusFilter = { status : status };
+            }
+        }
+        else {
+            statusFilter = {};
+        }
+
         // On récupère l'id de la route qui contient l'id de notre catégorie
         const idCat = req.params.id;
         // on filtre les catégories pour récupérer la catégorie dont on veut récupérer les tâches
         // ATTENTION au nom du champ à récupérer (categoryId) doit être le même que dans la DB voir le Schema (task-model.js)
         let categoryFilter = { categoryId : idCat };
+
         // On passe la catégorie au find()
-        const tasks = await Task.find(categoryFilter)
+        const tasks = await Task.find({ $and : [categoryFilter, statusFilter] })
             .populate({
                 path : 'categoryId',
                 select : { name : 1, icon : 1 },
@@ -86,12 +122,31 @@ const taskController = {
         const offset = req.query.offset ? req.query.offset : 0;
         const limit = req.query.limit ? req.query.limit : 10;
 
+        // Pour la possible query avec le status : 
+        let statusFilter;
+        const status = req.query.status;
+        if (status) {
+            // Si notre status est un tableau (contient plusieurs status à évaluer)
+            if (Array.isArray(status)) {
+                // Puisqu'on a un tableau, on regarde si le status de chaque reqête a une valeur compris dans le tableau fourni
+                statusFilter = { status : { $in : status } };
+            }
+            else {
+                statusFilter = { status : status };
+            }
+        }
+        else {
+            statusFilter = {};
+        }
+
         // On récupère l'id de la route qui contient l'id de notre user
         const idReceiver = req.params.id;
         // on filtre les users pour récupérer le user dont on veut récupérer les tâches
         // ATTENTION au nom du champ à récupérer (receiverUserId) doit être le même que dans la DB voir le Schema (task-model.js)
         let receiverFilter = { receiverUserId : idReceiver };
-        const tasks = await Task.find(receiverFilter)
+
+
+        const tasks = await Task.find({ $and : [receiverFilter, statusFilter] })
             .populate({
                 path : 'categoryId',
                 select : { name : 1, icon : 1 },
