@@ -17,7 +17,7 @@ const authController = {
         //     "credential": "monIdentifiant",    //monIdentifiant pourra être soit un pseudo, soit un email
         //     "password": "monPassword"
         // }
-        const { credential, password} = req.body;
+        const { credential, password } = req.body;
         // On construit notre filtre : on recherche l'utilisateur dont l'email correspond à la valeur dans credential ou son pseudo correspond à la valeur dans credential
         const credentialFilter = { $or : [ {email : credential} , {pseudo : credential} ] };
         const user = await User.findOne(credentialFilter);

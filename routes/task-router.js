@@ -14,10 +14,10 @@ taskRouter.route('/:id')
     .put(idValidator(), bodyValidation(updateTaskValidator), taskController.update)
     .delete(idValidator(), taskController.delete);
 
-taskRouter.route('/category/:categoryname')
+taskRouter.route('/category/:id')
     .get(taskController.getByCategory);
 
-taskRouter.route('/user/:username')
+taskRouter.route('/user/:id')
     .get(taskController.getByUser);
 
 module.exports = taskRouter;
