@@ -11,12 +11,9 @@ const bodyValidation = (yupValidator) => {
             // "icon" : "🎒",
             // "patate": "oui" }
             // Si on arrive ici depuis la route /api/category/ :
-            // yupValidator contient notre categoryValidator, donc on va déclencher la validationsur notre categoryValidator
-            // const validData = await categoryValidator.noUnknown().validate(req.body, 
-            const validData = await yupValidator.noUnknown().validate(req.body, 
-                { 
-                    abortEarly : false 
-                });
+            // yupValidator contient notre categoryValidator, donc on va déclencher la validation sur notre categoryValidator
+            // const validData = await categoryValidator.noUnknown().validate(req.body, {abortEarly : false });
+            const validData = await yupValidator.noUnknown().validate(req.body, {abortEarly : false});
             // On remplace req.body qui contient potentiellement des données en plus que ce que l'on souhaite par validData, qui a été nettoyé des données qu'on ne souhaite pas insérer
             // Après la validation + la méthode noUnknown, validData contient :
             // { 
@@ -24,6 +21,7 @@ const bodyValidation = (yupValidator) => {
             // "icon" : "🎒", }
             // Par contre req.body, lui contient toujours une valeur pour patate, on remplace donc le body de la request par validDAta
             req.body = validData;
+            // On continue la requête
             next();
         }
 

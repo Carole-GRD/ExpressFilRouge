@@ -40,7 +40,7 @@ const authController = {
         }
         // TODO : générer et renvoyer un token
         const token = await jwtUtils.generate(user);
-        return res.json({token});   // -> accolades pour avoir un objet token et pas juste sa valeur
+        return res.status(200).json({token});   // -> accolades pour avoir un objet token et pas juste sa valeur
     },
     register : async (req, res) => {
         // Pour enregistrer un nouvel utilisateur, on ne va pas stocker son mot de passe en clair dans la base de données

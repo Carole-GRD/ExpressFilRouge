@@ -66,7 +66,7 @@ const authentication = ( roles /*options*/) => {
         req.user = decodedToken;
 
         next();
-}
+    }
 }
 
 module.exports = authentication;

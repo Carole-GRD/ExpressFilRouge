@@ -17,9 +17,9 @@ taskRouter.route('/:id')
     .delete(authentication(['Admin']), idValidator(), taskController.delete);    // Etre connecté + Admin
 
 taskRouter.route('/category/:id')
-    .get(authentication(), taskController.getByCategory);
+    .get(authentication(), idValidator(), taskController.getByCategory);
 
 taskRouter.route('/user/:id')
-    .get(authentication(), taskController.getByUser);
+    .get(authentication(), idValidator(), taskController.getByUser);
 
 module.exports = taskRouter;

@@ -6,7 +6,7 @@ const taskController = {
         console.log(req.query);
         // Pour récupérer le offset et le limit passés dans la requête
         const offset = req.query.offset ? req.query.offset : 0;
-        // ATTENTION : si on n'indique rien dans l'url, on en récupérera seulement les 10 premières tâches
+        // ATTENTION : si on n'indique rien dans l'url, on récupérera seulement les 10 premières tâches
         const limit = req.query.limit ? req.query.limit : 10;
 
         // Pour la possible query avec le status : 

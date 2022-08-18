@@ -3,8 +3,9 @@ const UserDTO = require('../dto/user-dto');
 
 // Fonction de mappage d'un user de DB en user DTO afin de retirer le password et le role
 // comme nous avons à faire plusieurs fois cette action, pour ne pas faire de répétition, on vient le faire dans une fonction
-const userMapperToDTO = user => new UserDTO(user.id, user.email, user.pseudo, user.firstname, user.lastname);
-
+const userMapperToDTO = user => new UserDTO(user.id, user.email, user.pseudo, user.firstname, user.lastname, user.role);
+// à la place du DTO on peut uiliser la méthode .select()
+// const users = await User.find().select('-password');
 
 const userController = {
     getAll : async (req, res) => {

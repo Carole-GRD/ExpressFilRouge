@@ -5,10 +5,10 @@ const { registerValidator, loginValidator } = require('../validators/auth-valida
 const authRouter = require('express').Router();
 
 authRouter.route('/login')
-    .post(bodyValidation(loginValidator) ,authController.login);
+    .post(bodyValidation(loginValidator), authController.login);
 
 authRouter.route('/register')
-    .post(bodyValidation(registerValidator) ,authController.register);
+    .post(bodyValidation(registerValidator), authController.register);
 
 
     // OU BIEN
