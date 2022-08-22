@@ -30,6 +30,11 @@ const app = express();
 // on importe la librairie aui gère les erreurs async await
 // ATTENTION : à mettre avant require (les routes)
 require('express-async-errors');
+
+// Ajout de la gestion des erreurs CORS (npm install CORS)
+const cors = require('cors');
+app.use(cors(/* Ajouter une config ! */))
+
 // On importe notre module router présent dans index.js en important tout le dossier routes
 const router = require('./routes');
 

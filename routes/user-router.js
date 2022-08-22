@@ -9,6 +9,7 @@ const userRouter = require('express').Router();
 
 userRouter.route('/')
     .get(authentication(), userController.getAll);
+    // .get(userController.getAll);
 
 userRouter.route('/:id')
     .get(authentication(), idValidator(), userController.getById)
